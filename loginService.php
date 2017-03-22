@@ -54,7 +54,6 @@ class LoginService
 
                 self::$_AdminData[2] = self::$_AdminAtt;
 
-                $res->free();
                 self::$_SqlHelper->close_connect();
 
                 if (count(self::$_AdminAtt) == false) {

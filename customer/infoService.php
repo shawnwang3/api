@@ -171,7 +171,6 @@ class InfoService
             $containerkind[] = $arr;
         }
 
-        $res->free();
         self::$_SqlHelper->close_connect();
 
          self::$_Infodata['infoAdd']= array(

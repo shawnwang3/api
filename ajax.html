@@ -5,23 +5,23 @@
 		<title></title>
 	</head>
 	<body>
-
+		
 		<h1>后端测试专用</h1>
 		<button type="button" onclick="loadDoc()">Change Content</button>
 		<br /><br />
 		<div id="demo"></div>
-
+		
 		<script>
 		function loadDoc() {
 			//如果提交的POST申请里，有JSON格式的数据，则创建相应的javascript对象，以便填入相应的name:value形式的字段数据。
-		    var order = {}, liftCase={}, gatePoint={}, returnCase={};
+		    var order = {},stationstart={}, door={}, stationend={},site={},door1={},door2={},door3={},sub={},sub1={},sub2={};
 		    //在javascript对象中，填入相应的name:value形式的字段数据。
 		    order.transittypeId = "$001"
 		    order.cargotypeId = "$0001"
+		    order.truckIs= "1"
 		    order.unitId = "$0001"
 		    order.carryId = "$0001"
 		    order.truckId  = "$0001"
-		    order.truckIs= 1;
 		    order.routeId = "00001"
 		    order.cargoId = "$0001"
 			order.shipdate = "2017-03-09 14:14:29"
@@ -29,44 +29,98 @@
 			order.customdate = "2017-03-09 14:14:29"
 			order.portdate = "2017-03-09 14:14:29"
 			order.mbl = "42"
-			order.hbl = "2342"
+			order.hbl = "23"
 			order.remark = "432"
 			order.cargo = "阿萨德好了"
 			order.num = "423"
 			order.weight = "423"
 			order.bulk = "423"
-
-			liftCase.station1 = ""
-			liftCase.address1 = ""
-			liftCase.contact1 = ""
-			liftCase.phone1 = ""
-			liftCase.pretime1 = ""
-
-			gatePoint.station2 = ""
-			gatePoint.address2 = ""
-			gatePoint.contact2 = ""
-			gatePoint.phone2 = ""
-			gatePoint.pretime2 = ""
-
-			returnCase.station3 = ""
-			returnCase.address3 = ""
-			returnCase.contact3 = ""
-			returnCase.phone3 = ""
-			returnCase.pretime3 = ""
-
-			order.lift_case = liftCase;
-			order.gate_point = gatePoint;
-			order.return_case = returnCase;
+			
+		   stationstart.sitetypeId='1'
+		   stationstart.siteorder='1'
+		   stationstart.stationId="0001"
+		   stationstart.address = "11111"
+		   stationstart.contact = "11111"
+	       stationstart.phone= "111111111"
+	       stationstart.predicttime= "2017-03-03 00:00:00"
+	       stationstart.remark= "2017-03-03 00:00:00"
+	        
+	       door1.sitetypeId='2'
+	       door1.siteorder='2'
+	       door1.stationId= "01"
+	       door1.address = "22222"
+	       door1.contact = "2131313"
+	       door1.phone= "3213123"
+	       door1.predicttime = "2017-03-03 00:00:00" 
+	       door1.remark = "2017-03-03 00:00:00" 
+	       
+           door2.sitetypeId='2'
+           door2.siteorder='3'
+	       door2.stationId= "22"
+	       door2.address = "22"
+	       door2.contact = "22"
+		   door2.phone= "22"
+		   door2.predicttime = "2017-03-03 00:00:00" 
+		   door2.remark = "22"
+		   
+	        door3.sitetypeId='2'
+	        door3.siteorder='4'
+	    	  door3.stationId= "22"
+	    	   door3.address = "22"
+	      door3.contact = "22"
+	      door3.phone= "22"
+	      door3.predicttime = "2017-03-03 00:00:00" 
+	 	   door3.remark = "22"
+  			
+           door.door1=door1;
+           door.door2=door2;
+           door.door3=door3;
+           
+           stationend.sitetypeId = "9"
+           stationend.siteorder = "5"
+	       stationend.stationId = "0001"
+	  	   stationend.address = "3123"
+	       stationend.contact = "32131"
+	       stationend.phone = "2131"
+	       stationend.predicttime = "2017-03-03 00:00:00" 
+	       stationend.remark = "2017-03-03 00:00:00"     			
+	       
+	       site.stationstart=stationstart;
+		   site.door=door;
+		   site.stationend=stationend;
+		    
+		    
+		    sub1.suborder="1"
+		    sub1.containertypeid="$0001"
+		    sub1.containerkindid="$0001"
+		    sub1.price="1212"
+		    sub1.plan="1213"
+		    sub1.remark = "2017-03-03 00:00:00" 
+		    
+		    sub2.suborder="2"
+		    sub2.containertypeid="$0002"
+		    sub2.containerkindid="$0002"
+		    sub2.price="2342"
+		    sub2.plan="1214"
+		    sub2.remark = "2017-03-03 21:00:00" 
+		    
+		    sub.sub1=sub1;
+		    sub.sub2=sub2;
+		    
+		    
+		    order.sub=sub;
+		    order.site=site;
+		   
 			//填好字段数据后，将javascript对象转化为JSON对象，以便ajax以JSON格式发送请求数据。
 		    var orderData = JSON.stringify(order);
-
+		    
 		    //创建XMLHttpRequest对象，用以发送相应数据给指定接口地址，并接收处理其返回的数据。
 		    var xhttp = new XMLHttpRequest();
 		    xhttp.onreadystatechange = function() {
 		  		console.log(this.readyState + "/" + this.status);//在浏览器的控制台中，输出不同阶段的准备状态值和状态码
 		    	if (this.readyState == 4 && this.status == 200) {
 		    		//将接口返回的数据以文本的方式，显示在id="demo"的div元素中。
-		      		document.getElementById("demo").innerHTML =
+		      		document.getElementById("demo").innerHTML = 
 		      		"发送的数据：account=admin&password=a&orderData=" + orderData
 		      		+ "<br><br>返回的数据：" + this.responseText;
 		   		}

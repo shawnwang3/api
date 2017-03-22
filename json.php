@@ -19,12 +19,19 @@ class Json
     {
 
           if($status=='ok'){
+              if($data){
               $result = array(
                  
                   'status'=>$status,
                   'message' => $message,
                   'data' => $data
-                  );             
+                  );}else{
+                      $result = array(
+                           
+                          'status'=>$status,
+                          'message' => $message,
+                          );
+              }             
           }else{
               $result = array(
                   'status'=>$status,

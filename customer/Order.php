@@ -16,11 +16,13 @@ require_once '..\json.php';
 $primalno = (empty($_POST['account'])) ? null : $_POST['account'];
 $password = (empty($_POST['password'])) ? null : $_POST['password'];
 $type = (empty($_POST['type'])) ? null : $_POST['type'];
-$data = (empty($_POST['orderData'])) ? null : $_POST['orderData'];
+$orderdata = (empty($_POST['orderData'])) ? null : $_POST['orderData'];
 
+//实例化一个json
+$json = new json();
 
 //判断用户输入的必填字段是否为空
-if  ($primalno==null ||$password==null || $type==null|| $data ==null){
+if  ($primalno==null ||$password==null || $type==null|| $orderdata ==null){
     $status="fail";
     $message ="数据链接失败";
     $data=null;
@@ -29,18 +31,21 @@ if  ($primalno==null ||$password==null || $type==null|| $data ==null){
     exit();
 }
 
-
-//实例化一个json
-$json = new json();
-$orderdata=$json->jsonDe($data);
+$orderdata=$json->jsonDe($orderdata);
 
 //实例化下订单
 $orderService=new OrderService;
 $res= $orderService->saveData($primalno,$password,$type,$orderdata);
-var_dump($res);
 
+$status=$res['status'];
+$message = $res['message'];
 
-var_dump($primalno,$password,$type,$orderdata);
+$dataJson = $json->jsonEn($status,$message);
+echo $dataJson;
+
+// var_dump($res);
+// var_dump($primalno,$password,$type,$orderdata);
+
 
 
 
