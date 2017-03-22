@@ -27,7 +27,8 @@ class OrderService
     }
 
     public function saveData($primalno, $password, $type, $orderdata)
-    {
+    {   
+                
         $res = self::orderNo();
         // 是否大于系统时间
         if (! $res) {
@@ -242,8 +243,8 @@ class OrderService
         );
     }
     
-    // public function submitData(){
-    // }
+    public function submitData(){
+    }
     
     // public function examineData(){
     

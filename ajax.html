@@ -28,7 +28,7 @@
 			order.acceptdate = "2017-03-09 14:14:29"
 			order.customdate = "2017-03-09 14:14:29"
 			order.portdate = "2017-03-09 14:14:29"
-			order.mbl = "42"
+			order.mbl = ""
 			order.hbl = "23"
 			order.remark = "432"
 			order.cargo = "阿萨德好了"
@@ -40,8 +40,8 @@
 		   stationstart.siteorder='1'
 		   stationstart.stationId="0001"
 		   stationstart.address = "11111"
-		   stationstart.contact = "11111"
-	       stationstart.phone= "111111111"
+		   stationstart.contact = ""
+	       stationstart.phone= ""
 	       stationstart.predicttime= "2017-03-03 00:00:00"
 	       stationstart.remark= "2017-03-03 00:00:00"
 	        
@@ -130,7 +130,7 @@
 		    //设置请求头的内容类型为文本。
 		    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		    //发送请求和相应的数据。
-		    xhttp.send("account=admin&password=a&type=submit&orderData=" + orderData);
+		    xhttp.send("account=admin&password=a&type=save&orderData=" + orderData);
 		}
 		</script>
 	</body>
