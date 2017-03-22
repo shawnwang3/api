@@ -33,31 +33,35 @@ if ($primalno == null || $password == null || $type == null || $orderdata == nul
     exit();
 }
 
-if ($type =="save") {
-    $orderdata = $json->jsonDe($orderdata);
-    $res = $orderService->saveData($primalno, $password, $type, $orderdata);
+$orderdata = $json->jsonDe($orderdata);
+
+if ($type == "save") {
+    $res = $orderService->saveData($primalno, $orderdata);
     $status = $res['status'];
     $message = $res['message'];
     $dataJson = $json->jsonEn($status, $message);
     echo $dataJson;
-}else if($type=="submit"){
-    
-    
-    
-    
-}else if($type=="affirm"){
-  
-    
-    
-    
-    
-}else{
-    $status = "fail";
-    $message = "数据类型链接失败";
-    $data = null;
-    $dataJson = $json->jsonEn($status, $message, $data);
-    echo $dataJson;
-}
+} else 
+    if ($type == "submit") {
+        $res = $orderService->submitData($primalno, $orderdata);
+        $status = $res['status'];
+        $message = $res['message'];
+        $dataJson = $json->jsonEn($status, $message);
+        echo $dataJson;
+    } else 
+        if ($type == "affirm") {
+            $res = $orderService->affirmData($primalno, $orderdata);
+            $status = $res['status'];
+            $message = $res['message'];
+            $dataJson = $json->jsonEn($status, $message);
+            echo $dataJson;
+        } else {
+            $status = "fail";
+            $message = "数据类型链接失败";
+            $data = null;
+            $dataJson = $json->jsonEn($status, $message, $data);
+            echo $dataJson;
+        }
 
 
 

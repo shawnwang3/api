@@ -12,7 +12,7 @@ class SqlHelper
         self::$_conn = DbHelper::getInstance()->connect();
     }
 
-    // 操作ql
+    // 操作dql
     public function execute_dql($sql)
     {
         $res = self::$_conn->query($sql) or die("sql_dql报错" . self::$_conn->error);

@@ -21,14 +21,15 @@ class OrderService
 
     protected static $_Createdate;
 
+    public static $_Billid;
+
     public function __construct()
     {
         self::$_SqlHelper = new SqlHelper();
     }
 
-    public function saveData($primalno, $password, $type, $orderdata)
-    {   
-                
+    public function saveData($primalno, $orderdata)
+    {
         $res = self::orderNo();
         // 是否大于系统时间
         if (! $res) {
@@ -38,11 +39,12 @@ class OrderService
             );
             exit();
         }
+        self::$_Billid = $res;
         /**
          * *主表**
          */
         // 货源编号
-        $billid = $res;
+        $billid = self::$_Billid;
         // 客户为0 销售为1
         $originid = 0;
         // 发生时间
@@ -236,19 +238,57 @@ class OrderService
                 exit();
             }
         }
-        self::$_SqlHelper->close_connect();
         return array(
             'status' => 'ok',
-            'message' => '数据存入成功'
+            'message' => '数据保存成功'
         );
+        self::$_SqlHelper->close_connect();
     }
-    
-    public function submitData(){
+
+    public function submitData($primalno, $orderdata)
+    {
+        self::saveData($primalno, $orderdata);
+        $billid = self::$_Billid;
+        $type = '1-2';
+        $sql = "call p_zh_containerdemand_billstate('" . $billid . "','" . $type . "',@ai_code,@as_msg);";
+        $row = self::$_SqlHelper->execute_dql($sql);
+        $res = $row->fetch_row();
+        if ($res[0] == 1) {
+            return array(
+                'status' => 'ok',
+                'message' => '数据提交成功'
+            );
+        } else {
+            return array(
+                'status' => 'fail',
+                'message' => '数据提交失败'
+            );
+        }
+        self::$_SqlHelper->close_connect();
     }
-    
-    // public function examineData(){
-    
-    // }
+
+    public function affirmData($primalno, $orderdata)
+    {
+        self::saveData($primalno, $orderdata);
+        $billid = self::$_Billid;
+        $type = '1-5';
+        $sql = "call p_zh_containerdemand_billstate('" . $billid . "','" . $type . "',@ai_code,@as_msg);";
+        $row = self::$_SqlHelper->execute_dql($sql);
+        $res = $row->fetch_row();
+        if ($res[0] == 1) {
+            return array(
+                'status' => 'ok',
+                'message' => '数据审核成功'
+            );
+        } else {
+            return array(
+                'status' => 'fail',
+                'message' => '数据审核失败'
+            );
+        }
+        self::$_SqlHelper->close_connect();
+    }
+
     public function orderNo()
     {
         self::$_Createdate = date("Y-m-d h:i:s");
