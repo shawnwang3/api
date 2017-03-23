@@ -1,7 +1,6 @@
 <?php
 /*
- * 提取页面加载资源
- *
+ * 下单预加载信息模型
  */
 header("Content-Type:text/html;charset=utf-8");
 require_once '..\sqlHelper.php';

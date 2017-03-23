@@ -1,9 +1,6 @@
 <?php
 /*
  * 下订单
- * @parame string $
- * @parame string $
- *
  */
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");

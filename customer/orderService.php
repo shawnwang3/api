@@ -1,7 +1,6 @@
 <?php
 /**
- * 验证判断 100成功   403用户或是密码错误   402用户或是密码错误    401无角色
- * return $array('code','message','data')
+ *下订单模型
  */
 header("Content-Type:text/html;charset=utf-8");
 
