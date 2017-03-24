@@ -12,7 +12,9 @@ require_once '.\unOrderService.php';
 // 接受数据
 $primalno = (empty($_POST['account'])) ? null : $_POST['account'];
 $password = (empty($_POST['password'])) ? null : $_POST['password'];
+$billid=(empty($_POST['billid'])) ? null : $_POST['billid'];
 
+//实例化一个json
 $json=new Json;
 
 //判断用户输入的必填字段是否为空
@@ -25,12 +27,28 @@ if ($primalno==null || $password==null){
     exit();
 }
 
-$info=new InfoService;
-$res=$info->getInfo($primalno);
+//实例化一个unOrderService
+$unOrder=new unOrderService();
+
+if($billid==null){
+$res=$unOrder->getUnOrder($primalno);
 $status=$res['status'];
 $message = $res['message'];
 $data = $res['data'];
-
 $dataJson = $json->jsonEn($status,$message,$data);
-
 echo $dataJson;
+}else{
+    $res=$unOrder->DetUnorder($billid);
+    $status=$res['status'];
+    $message = $res['message'];
+    $data = $res['data'];
+    $dataJson = $json->jsonEn($status,$message,$data);
+    echo $dataJson;
+
+}
+
+
+
+
+
+
