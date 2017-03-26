@@ -29,12 +29,30 @@ if ($primalno==null || $password==null){
 
 //实例化一个unOrderService
 $unOrder=new unOrderService();
+<<<<<<< HEAD
 $res=$billid?$unOrder->detUnorder($billid):$unOrder->getUnOrder($primalno);
+=======
+
+if($billid==null){
+$res=$unOrder->getUnOrder($primalno);
+>>>>>>> origin/master
 $status=$res['status'];
 $message = $res['message'];
 $data = $res['data'];
 $dataJson = $json->jsonEn($status,$message,$data);
 echo $dataJson;
+<<<<<<< HEAD
+=======
+}else{
+    $res=$unOrder->DetUnorder($billid);
+    $status=$res['status'];
+    $message = $res['message'];
+    $data = $res['data'];
+    $dataJson = $json->jsonEn($status,$message,$data);
+    echo $dataJson;
+
+}
+>>>>>>> origin/master
 
 
 
