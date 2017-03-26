@@ -40,13 +40,13 @@ class SqlHelper
     public function fetch_assoc($sql){
         $res = $this->execute_dql($sql);
         return $res->fetch_assoc();
-        $res->free();
+
     }
     //mysqli_fetch_row 查数据 关联数值
     public function fetch_row($sql){
         $res = $this->execute_dql($sql);
         return $res->fetch_row();
-        $res->free();
+
     }
 
     //关闭数据库
